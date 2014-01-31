@@ -15,7 +15,10 @@ class Pushed {
             throw new PushedException(socket_strerror(socket_last_error())); 
         }
 
-        if (!socket_connect($pushed->mSocket, $path)) {
+        //WHY CONNECT PRINTS A WARNING
+        //WHY, IT ALREADY RETURNS NULL
+        //THIS LANGUAGE IS HORSE POOP
+        if (!@socket_connect($pushed->mSocket, $path)) {
             throw new PushedException(socket_strerror(socket_last_error()));
         }
 
@@ -33,7 +36,7 @@ class Pushed {
             throw new PushedException(socket_strerror(socket_last_error())); 
         }
 
-        if (!socket_connect($pushed->mSocket, $ipSix ? "::1" : "127.0.0.1", $localPort)) {
+        if (!@socket_connect($pushed->mSocket, $ipSix ? "::1" : "127.0.0.1", $localPort)) {
             throw new PushedException(socket_strerror(socket_last_error()));
         }
 
