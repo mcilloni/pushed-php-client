@@ -8,11 +8,9 @@ class Pushed {
 
         $pushed = new Pushed();
 
-        //Ok, C functions in a class, just, what?
         $pushed->mSocket = socket_create(AF_UNIX, SOCK_STREAM, SOL_TCP);
 
-        // let's use ===, who knows what php can intepret as false with ==
-        if($pushed->mSocket === FALSE) {
+        if(!is_resource($pushed->mSocket) || !socket_set_option($this->mSocket, SOL_SOCKET, SO_RCVTIMEO, [ 'sec' => 0, 'usec' => '500000'])) {
             //WHAT? socket_strerror(socket_last_error()) is just shit
             throw new PushedException(socket_strerror(socket_last_error())); 
         }
@@ -31,7 +29,7 @@ class Pushed {
 
         $pushed->mSocket = socket_create($ipSix ? AF_INET6 : AF_INET, SOCK_STREAM, SOL_TCP);
 
-        if($pushed->mSocket === FALSE) {
+        if(!is_resource($pushed->mSocket) || !socket_set_option($this->mSocket, SOL_SOCKET, SO_RCVTIMEO, [ 'sec' => 0, 'usec' => '500000'])) {
             throw new PushedException(socket_strerror(socket_last_error())); 
         }
 
