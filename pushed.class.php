@@ -54,6 +54,16 @@ class Pushed {
 
     public $mSocket;
 
+    public function __destruct() {
+
+      if(!@socket_shutdown($this->mSocket)) {
+        throw new PushedException(socket_strerror(socket_last_error()));
+      }
+
+      socket_close($this->mSocket);
+
+    }
+
     public function addUser($id) {
         return $this->rawRequest('ADDUSER',"$id");
     }
