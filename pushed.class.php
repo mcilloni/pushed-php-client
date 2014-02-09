@@ -73,13 +73,29 @@ class Pushed {
     }
 
     public function exists($id) {
-        $resp = $this->rawRequest('EXISTS',"$id");
 
-        if ($resp[0] == Pushed::$REJECTED) {
-            throw new PushedException($resp[1]);
-        }
+      if(!is_numeric($id)) {
+        throw new PushedException("Not numeric id $id");
+      }
 
-        return $resp[0] === Pushed::$YES;
+      $resp = $this->rawRequest('EXISTS',"$id");
+
+      if ($resp[0] == Pushed::$REJECTED) {
+        throw new PushedException($resp[1]);
+      }
+
+      return $resp[0] === Pushed::$YES;
+    }
+
+    public function existsDeviceId($connector, $devId) {
+      
+      $resp = $this->rawRequest('EXISTS',"$connector:$devId");
+
+      if ($resp[0] == Pushed::$REJECTED) {
+        throw new PushedException($resp[1]);
+      }
+
+      return $resp[0] === Pushed::$YES;
     }
 
     public function halt($timeout) {
@@ -116,14 +132,8 @@ class Pushed {
         return $this->rawRequest('SUBSCRIBE',"$id $service:$devId");
     }
 
-    public function subscribed($id, $service, $devId = FALSE) {
-        $args = "$id $service";
-
-        if($devId !== FALSE) {
-            $args .= ":$devID";
-        }
-
-        $resp =  $this->rawRequest('SUBSCRIBED', $args);
+    public function subscribed($id, $service) {
+        $resp =  $this->rawRequest('SUBSCRIBED', "$id $service");
 
 
         if ($resp[0] == Pushed::$REJECTED) {
