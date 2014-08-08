@@ -1,5 +1,5 @@
 <?php
-namespace NERDZ\Core\Client;
+namespace pushed;
 
 class Pushed {
 
