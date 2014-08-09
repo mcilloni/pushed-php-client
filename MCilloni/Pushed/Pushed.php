@@ -1,5 +1,6 @@
 <?php
-namespace MCilloni/Pushed;
+namespace MCilloni\Pushed;
+use Exception;
 
 class Pushed {
 
