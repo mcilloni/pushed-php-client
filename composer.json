@@ -1,7 +1,23 @@
 {
     "name": "mcilloni/pushed",
+    "type": "client",
     "description": "Client for connecting PHP scripts to a pushed server (see github.com/mcilloni/pushed)",
+    "license": "LGPL",
+    "authors": [
+        {
+            "name": "Marco Cilloni",
+            "email": "marco.cilloni@yahoo.com"
+        },
+        {
+            "name": "Paolo Galeone",
+            "email": "nessuno@nerdz.eu"
+        }
+    ],
     "require": {
         "php": ">=5.3.0"
-    }
+    },
+    "autoload": {
+        "psr-0": { "MCilloni\\Pushed\\": "" }
+    },
+    "minimum-stability": "dev"
 }
