@@ -1,5 +1,5 @@
 <?php
-namespace pushed;
+namespace mcilloni/pushed/Pushed;
 
 class Pushed {
 
