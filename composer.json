@@ -1,0 +1,7 @@
+{
+    "name": "mcilloni/pushed",
+    "description": "Client for connecting PHP scripts to a pushed server (see github.com/mcilloni/pushed)",
+    "require": {
+        "php": ">=5.3.0",
+    }
+}
